@@ -1,7 +1,22 @@
 #pragma once
 
 int fibonacci_iterative(int sequence) {
-    // TODO: Your implementation goes here
+    if (sequence > 0) {
+        int n1{0};
+        int n2{1};
+
+        int result{0};
+
+        do {
+            result = n2 + n1;
+            n1 = n2;
+            n2 = result;
+
+        } while (--sequence > 1);
+
+        return result;
+    }
+
     return 0;
 }
 
