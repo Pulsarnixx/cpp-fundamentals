@@ -9,7 +9,7 @@ std::string calculate(const std::string& command, int first, int second) {
   	return std::to_string(first - second);
     }
     else if(command == "multiply"){
-     	//TODO
+     	return std::to_string(first * second);
     }
     else if(command == "divide"){
 	//TODO
