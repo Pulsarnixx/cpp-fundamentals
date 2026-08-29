@@ -12,6 +12,23 @@ int NWD(int lhs, int rhs) {
 }
 
 int NWW(int lhs, int rhs) {
-    // TODO: Implement me :)
-    return -1;
+    if (lhs == 0 || rhs == 0) {
+        return 0;
+    }
+
+    lhs = abs(lhs);
+    rhs = abs(rhs);
+
+    int lhs2 = lhs;
+    int rhs2 = rhs;
+
+    while (lhs2 != rhs2) {
+        if (lhs2 < rhs2) {
+            lhs2 += lhs;
+        } else {
+            rhs2 += rhs;
+        }
+    }
+
+    return lhs2;
 }
