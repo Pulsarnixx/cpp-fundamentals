@@ -1,5 +1,6 @@
 #include "validation.hpp"
-#include <random>
+#include <algorithm>
+#include <cctype>
 
 std::string getErrorMessage(ErrorCode code) {
     switch (code) {
@@ -39,13 +40,23 @@ bool doPasswordsMatch(const std::string& pass1, const std::string& pass2) {
 }
 
 ErrorCode checkPasswordRules(const std::string& pass) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(0, 4);
+    if (pass.size() < 9u) {
+        return ErrorCode::PasswordNeedsAtLeastNineCharacters;
+    }
 
-    const int number = distrib(gen);
+    if (std::none_of(pass.begin(), pass.end(), [](unsigned char c) { return std::isdigit(c); })) {
+        return ErrorCode::PasswordNeedsAtLeastOneNumber;
+    }
 
-    return static_cast<ErrorCode>(number);
+    if (std::none_of(pass.begin(), pass.end(), [](unsigned char c) { return !std::isalnum(c); })) {
+        return ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter;
+    }
+
+    if (std::none_of(pass.begin(), pass.end(), [](unsigned char c) { return std::isupper(c); })) {
+        return ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter;
+    }
+
+    return ErrorCode::Ok;
 }
 
 ErrorCode checkPassword(const std::string& pass1, const std::string& pass2) {
