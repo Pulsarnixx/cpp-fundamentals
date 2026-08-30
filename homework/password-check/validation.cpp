@@ -39,3 +39,7 @@ std::string getErrorMessage(ErrorCode code) {
         break;
     }
 }
+
+bool doPasswordsMatch(const std::string& pass1, const std::string& pass2) {
+    return (pass1 == pass2);
+}
