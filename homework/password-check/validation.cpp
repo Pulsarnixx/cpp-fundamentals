@@ -41,7 +41,7 @@ bool doPasswordsMatch(const std::string& pass1, const std::string& pass2) {
 ErrorCode checkPasswordRules(const std::string& pass) {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(0, 5);
+    std::uniform_int_distribution<> distrib(0, 4);
 
     const int number = distrib(gen);
 
@@ -49,5 +49,9 @@ ErrorCode checkPasswordRules(const std::string& pass) {
 }
 
 ErrorCode checkPassword(const std::string& pass1, const std::string& pass2) {
-    return ErrorCode::Ok;
+    if (doPasswordsMatch(pass1, pass2)) {
+        return checkPasswordRules(pass1);
+    }
+
+    return ErrorCode::PasswordsDoNotMatch;
 }
