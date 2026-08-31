@@ -21,7 +21,9 @@ void print(const std::vector<std::shared_ptr<int>>& vec) {
     std::cout << '\n';
 }
 void add10(std::vector<std::shared_ptr<int>>& vec) {
-    // TODO
+    for (const auto& ptr : vec) {
+        *ptr += 10;
+    }
 }
 
 void sub10(int* const ptr) {
