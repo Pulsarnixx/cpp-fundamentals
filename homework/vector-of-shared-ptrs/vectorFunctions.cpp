@@ -1,5 +1,7 @@
 #include "vectorFunctions.hpp"
 
+#include <iostream>
+
 std::vector<std::shared_ptr<int>> generate(int count) {
     std::vector<std::shared_ptr<int>> result;
     result.reserve(count);
@@ -12,7 +14,11 @@ std::vector<std::shared_ptr<int>> generate(int count) {
 }
 
 void print(const std::vector<std::shared_ptr<int>>& vec) {
-    // TODO
+    for (const auto& ptr : vec) {
+        std::cout << *ptr << ' ';
+    }
+
+    std::cout << '\n';
 }
 void add10(std::vector<std::shared_ptr<int>>& vec) {
     // TODO
